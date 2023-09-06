@@ -1,0 +1,28 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="7">
+            <item index="0" class="java.lang.String" itemvalue="aliyun-python-sdk-green" />
+            <item index="1" class="java.lang.String" itemvalue="django" />
+            <item index="2" class="java.lang.String" itemvalue="aliyun-python-sdk-core-v3" />
+            <item index="3" class="java.lang.String" itemvalue="mitmproxy" />
+            <item index="4" class="java.lang.String" itemvalue="pyquery" />
+            <item index="5" class="java.lang.String" itemvalue="pywinauto" />
+            <item index="6" class="java.lang.String" itemvalue="django-auth-ldap" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N801" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
