@@ -89,8 +89,7 @@ class Game(pygame.sprite.Sprite):
                 self.fixedBlockGroup.addBlocks(blk)
             self.dropBlockGroup.clearBlocks()
             self.dropBlockGroup = None
-            if self.fixedBlockGroup.processEliminate():
-                self.score += 1
+            self.score += self.fixedBlockGroup.processEliminate()
 
     def checkGameOver(self):
         allIndexes = self.fixedBlockGroup.getBlockIndexes()

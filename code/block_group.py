@@ -253,7 +253,7 @@ class BlockGroup(object):
     # 方块消除逻辑
     def processEliminate(self):
         hash = {}
-
+        score = 0
         allIndexes = self.getBlockIndexes()
         for idx in allIndexes:
             hash[idx] = 1
@@ -269,9 +269,10 @@ class BlockGroup(object):
                     break
             if full:
                 eliminateRowDict[row] = 1
+                score += 1
         if len(eliminateRowDict) > 0:
             self.doEliminate(eliminateRowDict)
-            return True
+        return score
 
     def setEliminate(self, el):
         self.isEliminating = el
