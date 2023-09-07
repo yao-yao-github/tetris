@@ -154,7 +154,7 @@ class BlockGroup(object):
                     blk.doRight()
 
         if pressed[K_DOWN]:
-            self.dropInterval = 80
+            self.dropInterval = 20
         else:
             self.dropInterval = 600
 
