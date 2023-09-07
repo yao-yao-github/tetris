@@ -1,4 +1,5 @@
 import pygame
+from pygame import K_SPACE
 
 from code.block_group import BlockGroup
 from code.const import *
@@ -41,6 +42,7 @@ class Game(pygame.sprite.Sprite):
             rect.centery = GAME_HEIGHT_SIZE / 2
             # 把游戏结束图片绘制图像到屏幕上
             self.surface.blit(self.gameOverImage, rect)
+            self.restart()
 
         scoreTextImage = self.scoreFont.render('Score: ' + str(self.score), True, (255, 255, 255))
         # 把积分绘制图像到屏幕上
@@ -98,3 +100,8 @@ class Game(pygame.sprite.Sprite):
             if idx[0] < 2:
                 self.isGameOver = True
 
+    def restart(self):
+        pressed = pygame.key.get_pressed()
+        if pressed[K_SPACE]:
+            self.fixedBlockGroup.clearBlocks()
+            self.isGameOver = False
