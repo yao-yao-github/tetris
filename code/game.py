@@ -3,6 +3,7 @@ from pygame import K_SPACE
 
 from code.block_group import BlockGroup
 from code.const import *
+from code.utils import getCurrentTime
 
 
 class Game(pygame.sprite.Sprite):
@@ -15,7 +16,9 @@ class Game(pygame.sprite.Sprite):
         self.score = 0
         self.isGameOver = False
         self.nextBlockGroup = None
+        self.dropInterval = 800
         self.generateNextBlockGroup()
+        self.startTime = getCurrentTime()
 
     # 旧的生成新的方块代码
     # def generateDropBlockGroup(self):
@@ -29,7 +32,7 @@ class Game(pygame.sprite.Sprite):
 
     def generateNextBlockGroup(self):
         conf = BlockGroup.GenerateBlockGroupConfig(0, GAME_COL + 3)
-        self.nextBlockGroup = BlockGroup(BlockGroupType.DROP, BLOCK_SIZE_W, BLOCK_SIZE_H, conf, self.getRelPos())
+        self.nextBlockGroup = BlockGroup(BlockGroupType.DROP, BLOCK_SIZE_W, BLOCK_SIZE_H, conf, self.getRelPos(), self.dropInterval)
 
     def draw(self):
         self.fixedBlockGroup.draw(self.surface)
@@ -67,6 +70,14 @@ class Game(pygame.sprite.Sprite):
                 return True
         return False
 
+    # 控制下落间隔时间
+    def collectorDropInterval(self):
+        nowTime = getCurrentTime()
+        interval = (nowTime - self.startTime) / 1000
+        if interval >= 20 and self.dropInterval >= 20:
+            self.dropInterval -= 30
+            self.startTime = nowTime
+
     def update(self):
         if self.isGameOver:
             return
@@ -83,6 +94,7 @@ class Game(pygame.sprite.Sprite):
         if self.dropBlockGroup:
             self.dropBlockGroup.update(self.fixedBlockGroup)
         else:
+            self.collectorDropInterval()
             self.generateDropBlockGroup()
 
         if self.willCollide():
@@ -105,3 +117,4 @@ class Game(pygame.sprite.Sprite):
         if pressed[K_SPACE]:
             self.fixedBlockGroup.clearBlocks()
             self.isGameOver = False
+            self.score = 0

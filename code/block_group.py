@@ -54,14 +54,14 @@ class BlockGroup(object):
             configList.append(config)
         return configList
 
-    def __init__(self, blockGroupType, width, height, blockConfigList, relPos):
+    def __init__(self, blockGroupType, width, height, blockConfigList, relPos, dropInterval=800):
         super(BlockGroup, self).__init__()
         self.blocks = []
         self.time = 0
         self.pressTime = {}
         self.blockGroupType = blockGroupType
         self.isEliminating = False
-        self.dropInterval = 100
+        self.dropInterval = dropInterval
         self.eliminateRowDict = {}
         self.eliminateTime = 0
         for config in blockConfigList:
@@ -155,8 +155,6 @@ class BlockGroup(object):
 
         if pressed[K_DOWN]:
             self.dropInterval = 20
-        else:
-            self.dropInterval = 600
 
         if pressed[K_UP] and self.checkAndSetPressTime(K_UP) and checkCollision(fixedBlockGroup, self.getLeftBlockIndexes()) and checkCollision(fixedBlockGroup, self.getRightBlockIndexes()):
             if self.checkLongBlockGroup():
