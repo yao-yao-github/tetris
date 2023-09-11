@@ -57,7 +57,7 @@ class BlockGroup(object):
     def __init__(self, blockGroupType, width, height, blockConfigList, relPos, dropInterval=800):
         super(BlockGroup, self).__init__()
         self.blocks = []
-        self.time = 0
+        self.time = getCurrentTime()
         self.pressTime = {}
         self.blockGroupType = blockGroupType
         self.isEliminating = False
@@ -133,6 +133,12 @@ class BlockGroup(object):
         self.pressTime[key] = getCurrentTime()
         return ret
 
+    def checkCanClickDown(self):
+        flag = False
+        if getCurrentTime() - self.time > 300:
+            flag = True
+        return flag
+
     # 按键控制函数
     def keyDownHandler(self, fixedBlockGroup):
         pressed = pygame.key.get_pressed()
@@ -153,7 +159,7 @@ class BlockGroup(object):
                 for blk in self.blocks:
                     blk.doRight()
 
-        if pressed[K_DOWN]:
+        if pressed[K_DOWN] and self.checkCanClickDown():
             self.dropInterval = 20
 
         if pressed[K_UP] and self.checkAndSetPressTime(K_UP) and checkCollision(fixedBlockGroup, self.getLeftBlockIndexes()) and checkCollision(fixedBlockGroup, self.getRightBlockIndexes()):

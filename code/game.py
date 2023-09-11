@@ -71,7 +71,7 @@ class Game(pygame.sprite.Sprite):
         return False
 
     # 控制下落间隔时间
-    def collectorDropInterval(self):
+    def controlDropInterval(self):
         nowTime = getCurrentTime()
         interval = (nowTime - self.startTime) / 1000
         if interval >= 20 and self.dropInterval >= 20:
@@ -94,7 +94,7 @@ class Game(pygame.sprite.Sprite):
         if self.dropBlockGroup:
             self.dropBlockGroup.update(self.fixedBlockGroup)
         else:
-            self.collectorDropInterval()
+            self.controlDropInterval()
             self.generateDropBlockGroup()
 
         if self.willCollide():
