@@ -135,7 +135,7 @@ class BlockGroup(object):
 
     def checkCanClickDown(self):
         flag = False
-        if getCurrentTime() - self.time > 300:
+        if getCurrentTime() - self.time > 100:
             flag = True
         return flag
 

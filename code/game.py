@@ -118,3 +118,4 @@ class Game(pygame.sprite.Sprite):
             self.fixedBlockGroup.clearBlocks()
             self.isGameOver = False
             self.score = 0
+            self.dropInterval = 800
